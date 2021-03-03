@@ -1,26 +1,49 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const list = [
+  {
+    id: 1,
+    title: 'django',
+    body : 'my django react app'
+  },
+  {
+    id: 1,
+    title: 'django',
+    body : 'my django react app'
+  }
+]
+
+const items = this.state.list.map(items =>
+  <div key={items.id}>
+    <h1>{items.title}</h1>
+    <p>{items.body}</p>
+  </div>
+  )
+
+class extends React.Component{
+  state = {
+    todo : []
+  }
+  componentDidMount() {
+    this.getTodos();
+  }
+  getTodos() {
+    axios.get('http://127.0.0.1:8000/api/')
+      .then(res=>
+      this.setState({ todos: res.data });
+  })
+  .catch(err =>
+    { console.log(err); });
+  render() {
+    return (
+      <div>
+         {items}
+      </div>
+    )
+  }
 }
 
 export default App;
